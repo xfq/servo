@@ -11,12 +11,12 @@ use syntax::parse::token;
 
 pub fn expand_lower<'cx>(cx: &'cx mut ExtCtxt, sp: Span, tts: &[ast::TokenTree])
                         -> Box<base::MacResult + 'cx> {
-    expand_cased(cx, sp, tts, |c| { c.to_lowercase() })
+    expand_cased(cx, sp, tts, |c| { c.to_lowercase().next().unwrap() })
 }
 
 pub fn expand_upper<'cx>(cx: &'cx mut ExtCtxt, sp: Span, tts: &[ast::TokenTree])
                         -> Box<base::MacResult + 'cx> {
-    expand_cased(cx, sp, tts, |c| { c.to_uppercase() })
+    expand_cased(cx, sp, tts, |c| { c.to_uppercase().next().unwrap() })
 }
 
 fn expand_cased<'cx, T>(cx: &'cx mut ExtCtxt, sp: Span, tts: &[ast::TokenTree], transform: T)
